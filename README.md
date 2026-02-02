@@ -1,33 +1,11 @@
-# DummyImageCompressor
-The following utility compresses (jpg) image files in order to reduce size. E.g., to send images in the emails.
+# Dummy Apps
 
-Drop jpeg files on the "DummyImageCompressor.exe". New compressed files will be placed in the original directory having '_' sign as a prefix.           
-Default image dimensions are 1920x1080 . For custom dimensions size, use the following parameters (one or both) when calling the app: `width=_here_goes_the_value_` `height=_here_goes_the_value_`
-            
+This repository contains a collection of small (Windows) apps.
 
-## Build
+## Apps
 
-### .NET Framework
-Build the solution (in VS or MSBuild).
+* [Dummy Image Compressor](dummy-image-compressor): A Windows app that can compress JPEG image files.
 
-##### Prerequisites
-.NET 4.8.x
+* [Dummy Folders Sync](dummy-folders-sync): A Windows app that can synchronize the contents of two folders.
 
-
-
-### .NET (Core)
-run from terminal:  
-```powershell
-dotnet build
-```  
-or for release:  
-```powershell
-dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false
-```
-
-#### Prerequisites
-.NET 8.x
-
-
-## Golang
-Go [here](./go/README.md).
+* [Caffeina](Caffeina): An app that keeps Windows awake.
