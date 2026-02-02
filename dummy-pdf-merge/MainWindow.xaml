@@ -1,0 +1,100 @@
+﻿<Window x:Class="PDFMerge.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="PDF Merge" Height="600" Width="800"
+        Background="#F5F5F5" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <!-- Status Bar -->
+        <Border DockPanel.Dock="Bottom" Background="#ECF0F1" Height="40" Padding="20" BorderThickness="0,1,0,0" BorderBrush="#BDC3C7">
+            <Grid>
+                <TextBlock Name="StatusTextBlock" Text="Ready" VerticalAlignment="Center" Foreground="#2C3E50"/>
+                <ProgressBar Name="ProgressBar" Height="4" VerticalAlignment="Bottom" Background="Transparent" Visibility="Collapsed"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid DockPanel.Dock="Top" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Buttons Row -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+                <Button Name="BrowseButton" Content="📁 Browse Files" Click="BrowseButton_Click" 
+                        Background="#3498DB" Foreground="White" Padding="15,10" FontSize="12" 
+                        Cursor="Hand" BorderThickness="0" Margin="0,0,10,0"/>
+                <Button Name="ClearButton" Content="🗑️ Clear All" Click="ClearButton_Click" 
+                        Background="#E74C3C" Foreground="White" Padding="15,10" FontSize="12" 
+                        Cursor="Hand" BorderThickness="0"/>
+            </StackPanel>
+
+            <!-- Drag and Drop Zone -->
+            <Border Grid.Row="1" Name="DropZone" AllowDrop="True" 
+                    Background="#ECF0F1" BorderBrush="#BDC3C7" BorderThickness="2" 
+                    Margin="0,0,0,15" Padding="20">
+                <Grid Name="DropZoneGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Empty State -->
+                    <StackPanel Grid.Row="1" Name="EmptyStatePanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="📄" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                        <TextBlock Text="Drag and drop files here" FontSize="14" Foreground="#7F8C8D" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="or use the Browse button to select files" FontSize="12" Foreground="#95A5A6" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <!-- File List -->
+                    <ListBox Name="FileListBox" Grid.Row="0" Grid.RowSpan="3" Background="Transparent" 
+                            BorderThickness="0" AllowDrop="True" SelectionMode="Single" Visibility="Collapsed">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="White" BorderBrush="#BDC3C7" BorderThickness="0,0,0,1" Padding="15" Margin="0,0,0,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding FileName}" FontWeight="Bold" Foreground="#2C3E50"/>
+                                            <TextBlock Text="{Binding FileType}" FontSize="11" Foreground="#7F8C8D" Margin="0,3,0,0"/>
+                                        </StackPanel>
+
+                                        <Button Grid.Column="1" Content="▲" Width="35" Height="35" Margin="10,0,0,0" 
+                                                Click="MoveUpButton_Click" Background="#27AE60" Foreground="White" 
+                                                Cursor="Hand" BorderThickness="0" FontSize="14"/>
+                                        <Button Grid.Column="2" Content="▼" Width="35" Height="35" Margin="5,0,0,0" 
+                                                Click="MoveDownButton_Click" Background="#27AE60" Foreground="White" 
+                                                Cursor="Hand" BorderThickness="0" FontSize="14"/>
+                                        <Button Grid.Column="3" Content="✕" Width="35" Height="35" Margin="5,0,0,0" 
+                                                Click="RemoveButton_Click" Background="#E74C3C" Foreground="White" 
+                                                Cursor="Hand" BorderThickness="0" FontSize="14"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding SizeDisplay}" Foreground="#7F8C8D" 
+                                                   VerticalAlignment="Center" Margin="15,0,0,0" FontSize="11"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!-- Merge Button -->
+            <Button Grid.Row="2" Name="MergeButton" Content="Merge and Create PDF" Click="MergeButton_Click" 
+                    Background="#27AE60" Foreground="White" Padding="20,15" FontSize="14" 
+                    Cursor="Hand" BorderThickness="1" BorderBrush="#27AE60" HorizontalAlignment="Right"
+                    IsEnabled="False"/>
+        </Grid>
+    </DockPanel>
+</Window>
