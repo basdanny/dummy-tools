@@ -13,7 +13,7 @@ dotnet build
 
 For release (publish): 
 ```powershell
-dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false
+dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false -o:out\
 ```
 
 #### Prerequisites
